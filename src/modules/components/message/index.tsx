@@ -31,15 +31,14 @@ const MessageAi = ({ role, text }: MessageProps) => {
 
       {role === "user" && (
         <>
-          <p
-            className="w-4/5 bg-gray-200 text-justify p-2 rounded-lg break-word"
-            dangerouslySetInnerHTML={{
-              __html: formatText(text),
-            }}
-          />
+          <div className="max-w-[300px]">
+            <p className=" w-full text-justify bg-gray-200 p-3 rounded-lg whitespace-pre-line break-words">
+              {text}
+            </p>
+          </div>
           <Avatar>
             <AvatarFallback>{role === "user" ? "U" : "AI"}</AvatarFallback>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarImage src="https://avatars.githubusercontent.com/u/145250554?v=4" />
           </Avatar>
         </>
       )}
