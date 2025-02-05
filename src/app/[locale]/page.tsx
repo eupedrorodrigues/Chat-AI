@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Globe } from "lucide-react";
+import { ChevronDown, ChevronUp, Globe, Send } from "lucide-react";
+
+import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -20,7 +24,6 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
-import { Send } from "lucide-react";
 
 import { chat } from "@/api/index";
 
@@ -29,11 +32,15 @@ interface Message {
   text: string;
 }
 
+const LANGUAGES = ["en", "pt-BR"];
+
 const HomePage = () => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
 
   const formatText = (text: string) => {
     let formattedText = text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
@@ -66,12 +73,22 @@ const HomePage = () => {
     setLoading(false);
   };
 
+  const handleLanguage = (language: string) => {
+    const pathSegments = pathname.split("/").filter(Boolean);
+    if (pathSegments.length > 0 && LANGUAGES.includes(pathSegments[0])) {
+      pathSegments[0] = language;
+    } else {
+      pathSegments.unshift(language);
+    }
+    return `/${pathSegments.join("/")}`;
+  };
+
   return (
     <div className="flex flex-col border-red-500 min-h-screen bg-slate-50 items-center justify-center">
       <Card className="w-[440px] h-[700px] grid grid-rows-[min-content_1fr_min-content]">
         <CardHeader>
           <CardTitle>Chat AI</CardTitle>
-          <CardDescription>Using Google Generative AI</CardDescription>
+          <CardDescription>{t("Using Google Generative AI")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 overflow-y-auto">
           {messages.map((msg, index) => (
@@ -125,7 +142,7 @@ const HomePage = () => {
         </CardContent>
         <CardFooter className="space-x-5 pt-3">
           <Textarea
-            placeholder="How can I help you"
+            placeholder={t("How can I help you")}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
@@ -157,8 +174,22 @@ const HomePage = () => {
                 )}
               </Button>
             </TooltipTrigger>
-            <TooltipContent side="right">language</TooltipContent>
+            <TooltipContent side="right">{t("language")}</TooltipContent>
           </Tooltip>
+          {isOpen && (
+            <ul className="mt-2">
+              {LANGUAGES.map((language) => (
+                <li
+                  key={language}
+                  className="hover:text-foreground hover:bg-accent mx-2 flex h-9 cursor-pointer flex-col items-start justify-center rounded-lg px-4 py-2 transition-all md:h-8"
+                >
+                  <Link href={handleLanguage(language)} legacyBehavior>
+                    <span className="w-full text-sm">{t(language)}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </TooltipProvider>
       </nav>
     </div>
