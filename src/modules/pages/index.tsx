@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import {
@@ -15,7 +15,7 @@ import {
 
 import MessageAi from "@/modules/components/message";
 import ChatInput from "@/modules/components/chat-input";
-// import LanguageSwitcher from "../components/language-switch";
+import LanguageSwitcher from "@/modules/components/language-switch";
 
 import { formatText } from "@/utils/format";
 import { chat } from "@/api/index";
@@ -25,14 +25,14 @@ interface Message {
   text: string;
 }
 
-// const LANGUAGES = ["en", "pt-BR"];
+const LANGUAGES = ["en", "pt-BR"];
 
 const ChatPage = () => {
   const t = useTranslations();
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
-  // const pathname = usePathname();
+  const pathname = usePathname();
 
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
@@ -58,15 +58,16 @@ const ChatPage = () => {
     setLoading(false);
   };
 
-  // const handleLanguage = (language: string) => {
-  //   const pathSegments = pathname.split("/").filter(Boolean);
-  //   if (pathSegments.length > 0 && LANGUAGES.includes(pathSegments[0])) {
-  //     pathSegments[0] = language;
-  //   } else {
-  //     pathSegments.unshift(language);
-  //   }
-  //   return `/${pathSegments.join("/")}`;
-  // };
+  const handleLanguage = (language: string) => {
+    const pathSegments = pathname.split("/").filter(Boolean);
+    if (pathSegments.length > 0 && LANGUAGES.includes(pathSegments[0])) {
+      pathSegments[0] = language;
+    } else {
+      pathSegments.unshift(language);
+    }
+    return `/${pathSegments.join("/")}`;
+  };
+
   return (
     <div className="flex flex-col border-red-500 min-h-screen bg-slate-50 items-center justify-center">
       <Card className="w-[440px] h-[700px] grid grid-rows-[min-content_1fr_min-content]">
@@ -88,6 +89,8 @@ const ChatPage = () => {
           />
         </CardFooter>
       </Card>
+      <div className="relative flex flex-col items-center"></div>
+      <LanguageSwitcher languages={LANGUAGES} handleLanguage={handleLanguage} />
     </div>
   );
 };
