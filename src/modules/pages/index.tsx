@@ -70,12 +70,12 @@ const ChatPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen items-start justify-center ">
-      <Card className="w-[440px] h-[650px] grid grid-rows-[min-content_1fr_min-content]">
+      <Card className="w-[450px] h-[650px] grid grid-rows-[min-content_1fr_min-content]">
         <CardHeader>
           <CardTitle>{t("Chat AI")}</CardTitle>
           <CardDescription>{t("Using Google Generative AI")}</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 overflow-y-auto">
+        <CardContent className="space-y-8 overflow-y-auto">
           {messages.map((msg, index) => (
             <MessageAi key={index} role={msg.role} text={msg.text} />
           ))}{" "}
