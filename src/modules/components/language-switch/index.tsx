@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import { Globe } from "lucide-react";
+
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -11,10 +13,7 @@ import {
   TooltipContent,
 } from "@/components/ui/tooltip";
 
-interface LanguageSwitcherProps {
-  languages: string[];
-  handleLanguage: (language: string) => string;
-}
+import { LanguageSwitcherProps } from "@/types";
 
 const LanguageSwitcher = ({
   languages,

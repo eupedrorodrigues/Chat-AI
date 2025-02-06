@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 
 import { Send } from "lucide-react";
-import { ChatInputProps } from "./types";
+import { ChatInputProps } from "@/types";
 
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";

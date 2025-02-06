@@ -5,14 +5,10 @@ import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { Message } from "@/types";
 import { formatText } from "@/utils/format";
 
-interface MessageProps {
-  role: string;
-  text: string;
-}
-
-const MessageAi = ({ role, text }: MessageProps) => {
+const MessageAi = ({ role, text }: Message) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

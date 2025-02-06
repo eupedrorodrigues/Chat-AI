@@ -17,13 +17,9 @@ import MessageAi from "@/modules/components/message";
 import ChatInput from "@/modules/components/chat-input";
 import LanguageSwitcher from "@/modules/components/language-switch";
 
-import { formatText } from "@/utils/format";
+import { Message } from "@/types";
 import { chat } from "@/api/index";
-
-interface Message {
-  role: string;
-  text: string;
-}
+import { formatText } from "@/utils/format";
 
 const LANGUAGES = ["en", "pt-BR"];
 
