@@ -30,7 +30,7 @@ const LanguageSwitcher = ({
   };
 
   return (
-    <div className="mt-2">
+    <div>
       <nav className="fixed">
         <TooltipProvider>
           <Tooltip>

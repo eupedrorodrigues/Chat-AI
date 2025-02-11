@@ -65,8 +65,8 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-start justify-center ">
-      <Card className="w-[450px] h-[650px] grid grid-rows-[min-content_1fr_min-content]">
+    <div className="flex flex-col min-h-screen items-start justify-center p-4">
+      <Card className="w-full md:w-[450px] h-[550px] md:h-[650px] grid grid-rows-[min-content_1fr_min-content]">
         <CardHeader>
           <CardTitle>{t("Chat AI")}</CardTitle>
           <CardDescription>{t("Using Google Generative AI")}</CardDescription>
@@ -74,7 +74,7 @@ const ChatPage = () => {
         <CardContent className="space-y-8 overflow-y-auto">
           {messages.map((msg, index) => (
             <MessageAi key={index} role={msg.role} text={msg.text} />
-          ))}{" "}
+          ))}
         </CardContent>
         <CardFooter className="space-x-5 pt-3">
           <ChatInput
@@ -85,7 +85,7 @@ const ChatPage = () => {
           />
         </CardFooter>
       </Card>
-      <div>
+      <div className="mt-2">
         <LanguageSwitcher
           languages={LANGUAGES}
           handleLanguage={handleLanguage}
