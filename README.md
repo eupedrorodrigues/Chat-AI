@@ -1,6 +1,6 @@
 # 🤖 Chat AI
 
-Este projeto é um chat-ai que utiliza a API da Gemini para gerar respostas inteligentes. Foi desenvolvido com Next.js, shadcn para componentes UI, Tailwind CSS para estilização e i18n para suporte a internacionalização.
+Este projeto é uma aplicação **stateful**, que chamo de chat-AI, e utiliza a API da Gemini para gerar respostas inteligentes. Foi desenvolvido com Next.js, shadcn para componentes UI, Tailwind CSS para estilização e i18n para suporte à internacionalização.
 
 ## Pré-requisitos
 
